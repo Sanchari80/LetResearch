@@ -1,0 +1,66 @@
+.body {
+  padding-top: 14px;
+  padding-bottom: 40px;
+}
+@media (min-width: 900px) {
+  .body {
+    padding-top: 28px;
+  }
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 14px;
+  border-radius: var(--r-pill);
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  color: var(--text3);
+  font-size: var(--size-body);
+}
+@media (hover: hover) {
+  .search:hover {
+    border-color: var(--border);
+    color: var(--text2);
+  }
+}
+.filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-inline: calc(var(--gutter) * -1);
+  padding: 2px var(--gutter) 4px;
+}
+.filters::-webkit-scrollbar {
+  display: none;
+}
+.filters > * {
+  flex-shrink: 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1280px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.listCard {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+.listTitle {
+  margin: 6px 0;
+}
+.requestTime {
+  margin: -6px 0 6px 58px;
+}

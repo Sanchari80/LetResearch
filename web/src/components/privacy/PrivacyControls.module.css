@@ -1,0 +1,122 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--hairline);
+  background: var(--surface);
+  text-align: left;
+  animation: rise 220ms var(--ease-out) backwards;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    transform var(--fast) var(--ease-out);
+}
+.option:active {
+  transform: scale(0.985);
+}
+@media (hover: hover) {
+  .option:not(.optionSelected):hover {
+    border-color: var(--silver);
+  }
+}
+.optionSelected {
+  border-color: var(--ink);
+  background: var(--surface-raised);
+}
+.optionIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--silver);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: border-color 160ms ease;
+}
+.radioDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: scale(0);
+  transition: transform 260ms var(--ease-spring);
+}
+.optionSelected .radio {
+  border-color: var(--ink);
+}
+.optionSelected .radioDot {
+  transform: scale(1);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: var(--r-pill);
+  flex-shrink: 0;
+  font-size: var(--size-caption);
+  font-weight: 500;
+  transition:
+    transform var(--fast) var(--ease-out),
+    filter var(--fast) ease;
+}
+.pill:active {
+  transform: scale(0.92);
+}
+@media (hover: hover) {
+  .pill:hover {
+    filter: brightness(0.97);
+  }
+}
+.pillCompact {
+  width: 26px;
+  padding: 0;
+}
+.pillInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  animation: pop 320ms var(--ease-spring) backwards;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: var(--r-pill);
+  font-size: var(--size-caption);
+  font-weight: 500;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}

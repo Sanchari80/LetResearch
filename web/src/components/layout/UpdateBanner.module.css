@@ -1,0 +1,20 @@
+.banner {
+  position: fixed;
+  z-index: 60;
+  left: 12px;
+  right: 12px;
+  bottom: calc(var(--safe-bottom) + 14px);
+  margin: 0 auto;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 8px 10px 16px;
+  border-radius: var(--r-lg);
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-float);
+}
+:global([data-tabbar]) .banner {
+  bottom: calc(var(--tabbar-h) + var(--safe-bottom) + 12px);
+}

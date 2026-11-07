@@ -1,0 +1,39 @@
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.dot {
+  display: block;
+  border-radius: 50%;
+  animation: bounce 1.04s ease-in-out infinite;
+}
+.bubble {
+  align-self: flex-start;
+  display: inline-flex;
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  border-radius: 18px 18px 18px 6px;
+  padding: 12px 14px;
+  margin: 4px 0;
+  animation: rise 200ms var(--ease-out) backwards;
+}
+
+@keyframes bounce {
+  0%,
+  50%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.55;
+  }
+  25% {
+    transform: translateY(var(--lift, -4px));
+    opacity: 1;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}

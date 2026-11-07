@@ -1,0 +1,80 @@
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 11px;
+  border-radius: var(--r-pill);
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  color: var(--ink-soft);
+  font-size: var(--size-meta);
+  font-weight: 500;
+  animation: fade 240ms ease backwards;
+  transition:
+    transform var(--fast) var(--ease-out),
+    border-color var(--fast) ease;
+}
+.chip:active {
+  transform: scale(0.94);
+}
+@media (hover: hover) {
+  .chip:hover {
+    border-color: var(--silver);
+  }
+}
+.chipMessaging {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+}
+@media (hover: hover) {
+  .chipMessaging:hover {
+    border-color: rgba(47, 111, 104, 0.35);
+  }
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+}
+.rowMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: var(--r-sm);
+}
+@media (hover: hover) {
+  a.rowMain:hover .rowIcon {
+    background: var(--accent-soft);
+  }
+}
+.rowIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--well);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: background-color var(--fast) ease;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,39 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 10px 0;
+}
+.bare {
+  display: inline-flex;
+}
+.row:disabled,
+.bare:disabled {
+  opacity: 0.5;
+}
+.track {
+  position: relative;
+  width: 46px;
+  height: 26px;
+  border-radius: 13px;
+  padding: 3px;
+  flex-shrink: 0;
+  background: #c9ced5;
+  transition: background-color 220ms ease;
+}
+.thumb {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.22);
+  transition: transform 260ms var(--ease-spring);
+}
+.on {
+  background: var(--accent);
+}
+.on .thumb {
+  transform: translateX(20px);
+}

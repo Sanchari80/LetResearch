@@ -1,0 +1,31 @@
+.indicator {
+  position: fixed;
+  top: calc(var(--safe-top) + 4px);
+  left: 50%;
+  z-index: 60;
+  width: 40px;
+  height: 40px;
+  margin-top: -40px;
+  border-radius: 50%;
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-raised);
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.refreshing {
+  transition: transform var(--base) var(--ease-out);
+}
+.icon {
+  display: grid;
+  place-items: center;
+}
+.refreshing .icon {
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

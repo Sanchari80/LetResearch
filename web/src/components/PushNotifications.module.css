@@ -1,0 +1,16 @@
+.prompt {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 8px 14px 14px;
+  border-color: rgba(47, 111, 104, 0.25);
+}
+.icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}

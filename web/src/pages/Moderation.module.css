@@ -1,0 +1,7 @@
+.reports {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--warning-soft);
+  border-color: transparent;
+}

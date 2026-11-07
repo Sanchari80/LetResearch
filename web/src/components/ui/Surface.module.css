@@ -1,0 +1,107 @@
+.card {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-card);
+}
+.padded {
+  padding: 16px;
+}
+.raised {
+  box-shadow: var(--shadow-raised);
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: var(--hairline);
+  margin: 0;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--r-pill);
+  border: 1px solid transparent;
+  font-size: var(--size-meta);
+  font-weight: 500;
+  line-height: 1;
+  flex-shrink: 0;
+  max-width: 100%;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform var(--fast) var(--ease-out);
+}
+.small {
+  height: 26px;
+  padding: 0 9px;
+  gap: 4px;
+  font-size: var(--size-caption);
+}
+.tone-default {
+  background: var(--surface-raised);
+  color: var(--ink-soft);
+  border-color: var(--hairline);
+}
+.tone-accent {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.tone-steel {
+  background: var(--steel-soft);
+  color: var(--steel);
+}
+.tone-quiet {
+  background: var(--chip-quiet);
+  color: var(--ink-soft);
+}
+.selected {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.pressable {
+  cursor: pointer;
+}
+.pressable:active {
+  transform: scale(0.94);
+}
+@media (hover: hover) {
+  .pressable:not(.selected):hover {
+    border-color: var(--silver);
+  }
+}
+
+.count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  flex-shrink: 0;
+  animation: pop 320ms var(--ease-spring) backwards;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+}

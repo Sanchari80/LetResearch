@@ -1,0 +1,121 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: flex;
+}
+.rootBottom {
+  align-items: flex-end;
+  justify-content: center;
+}
+.rootCenter {
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay);
+}
+.panel {
+  position: relative;
+  width: 100%;
+  max-height: 88dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  box-shadow: var(--shadow-float);
+  outline: none;
+}
+.sheet {
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  padding-bottom: calc(max(var(--safe-bottom), 16px) + 4px);
+}
+.dialog {
+  border-radius: var(--r-lg);
+  padding-top: 20px;
+  padding-bottom: 24px;
+}
+.handle {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0 12px;
+  cursor: grab;
+  touch-action: none;
+  flex-shrink: 0;
+}
+.grabber {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--silver);
+}
+.body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 20px;
+}
+.title {
+  margin-bottom: 4px;
+}
+.description {
+  margin-bottom: 14px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 6px;
+  border-radius: var(--r-md);
+  text-align: left;
+  animation: rise 220ms var(--ease-out) backwards;
+  animation-delay: calc(40ms + var(--i, 0) * 35ms);
+  transition:
+    background-color var(--fast) ease,
+    transform var(--fast) var(--ease-out);
+}
+.action:active {
+  transform: scale(0.98);
+}
+@media (hover: hover) {
+  .action:hover {
+    background: rgba(35, 39, 46, 0.05);
+  }
+}
+.actionSelected {
+  background: var(--accent-soft);
+}
+.actionIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--well);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.actionLabel {
+  font-weight: 500;
+  font-size: var(--size-body);
+}
+
+.confirmRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

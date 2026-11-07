@@ -1,0 +1,77 @@
+.bar {
+  flex-shrink: 0;
+  padding: 10px 10px calc(max(var(--safe-bottom), 10px));
+  background: var(--surface);
+  border-top: 1px solid var(--hairline);
+}
+.inner {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.inputWrap {
+  flex: 1;
+  min-width: 0;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 21px;
+  border: 1px solid var(--border);
+  background: var(--surface-raised);
+  transition:
+    border-color var(--fast) ease,
+    box-shadow var(--fast) ease;
+}
+.inputWrap:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(47, 111, 104, 0.12);
+}
+.input {
+  width: 100%;
+  border: 0;
+  outline: none;
+  resize: none;
+  background: transparent;
+  font-size: 16px;
+  line-height: 22px;
+  padding: 9px 0;
+  max-height: 120px;
+  color: var(--ink);
+}
+@media (min-width: 900px) {
+  .input {
+    font-size: var(--size-body);
+  }
+}
+.input::placeholder {
+  color: var(--text3);
+}
+.send {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: #c9ced5;
+  transform: scale(0.86) rotate(-20deg);
+  transition:
+    transform 320ms var(--ease-spring),
+    background-color 160ms ease;
+}
+.sendReady {
+  background: var(--accent);
+  transform: scale(1) rotate(0deg);
+}
+.sendReady:active {
+  transform: scale(0.88);
+}
+@media (hover: hover) {
+  .sendReady:hover {
+    background: var(--accent-pressed);
+  }
+}

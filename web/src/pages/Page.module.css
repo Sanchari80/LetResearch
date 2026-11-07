@@ -1,0 +1,41 @@
+/* Shared page body: centred column under the sticky header. */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 18px;
+  padding-bottom: 48px;
+}
+.tight {
+  gap: 12px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 14px;
+  padding-bottom: 40px;
+}
+.centerScreen {
+  min-height: 70dvh;
+  display: grid;
+  place-items: center;
+  padding: 24px var(--gutter);
+}
+.footerBar {
+  position: sticky;
+  bottom: 0;
+  z-index: 15;
+  background: rgba(233, 235, 238, 0.94);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  backdrop-filter: saturate(140%) blur(12px);
+  border-top: 1px solid var(--hairline);
+  padding-bottom: var(--safe-bottom);
+}
+.footerInner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

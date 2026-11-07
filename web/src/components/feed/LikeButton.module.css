@@ -1,0 +1,93 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 20px;
+  color: var(--text2);
+  transition:
+    background-color var(--fast) ease,
+    transform var(--fast) var(--ease-out);
+}
+.button:active {
+  transform: scale(0.92);
+}
+@media (hover: hover) {
+  .button:hover {
+    background: rgba(194, 65, 75, 0.07);
+  }
+}
+.iconWrap {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+}
+.ring {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--like);
+  opacity: 0;
+  animation: burst 440ms ease-out;
+  pointer-events: none;
+}
+.heartPop {
+  display: grid;
+  animation: heart-pop 480ms var(--ease-spring);
+}
+.heartPress {
+  display: grid;
+  animation: heart-press 260ms ease;
+}
+.countWrap {
+  min-width: 18px;
+  overflow: hidden;
+}
+.count {
+  display: block;
+  font-size: var(--size-meta);
+  font-weight: 500;
+  animation: roll 180ms ease backwards;
+}
+.liked .count {
+  color: var(--like);
+}
+
+@keyframes burst {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  18% {
+    transform: scale(0.7);
+  }
+  55% {
+    transform: scale(1.22);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes heart-press {
+  40% {
+    transform: scale(0.85);
+  }
+}
+@keyframes roll {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

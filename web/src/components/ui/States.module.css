@@ -1,0 +1,94 @@
+.skeleton {
+  display: block;
+  background: #dadee3;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+.skeletonCard {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  padding: 16px;
+  border: 1px solid var(--hairline);
+}
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 16px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 56px 24px;
+  animation: fade 300ms ease backwards;
+}
+.compact {
+  padding-top: 28px;
+  padding-bottom: 28px;
+}
+.emptyIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #dfe2e7;
+  display: grid;
+  place-items: center;
+  margin-bottom: 8px;
+  border: 1px solid var(--surface-raised);
+  animation: grow 520ms var(--ease-spring) backwards;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px;
+  animation: fade 200ms ease backwards;
+}
+
+.track {
+  height: 4px;
+  border-radius: 2px;
+  background: #d9dde2;
+  overflow: hidden;
+}
+.fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 220ms ease;
+}
+
+.notice {
+  display: flex;
+  gap: 10px;
+  padding: 14px;
+  border-radius: var(--r-md);
+  animation: rise 240ms var(--ease-out) backwards;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes grow {
+  from {
+    transform: scale(0.8);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}

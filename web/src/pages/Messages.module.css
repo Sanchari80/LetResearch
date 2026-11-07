@@ -1,0 +1,14 @@
+.body {
+  padding-top: 14px;
+  padding-bottom: 40px;
+}
+@media (min-width: 900px) {
+  .body {
+    padding-top: 28px;
+  }
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}

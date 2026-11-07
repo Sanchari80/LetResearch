@@ -1,0 +1,26 @@
+.hero {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--success-soft);
+  display: grid;
+  place-items: center;
+  margin-bottom: 6px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.item > svg {
+  margin-top: 3px;
+  flex-shrink: 0;
+}

@@ -1,0 +1,116 @@
+.card {
+  overflow: hidden;
+}
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 12px 10px 16px;
+}
+.avatarLink {
+  border-radius: 50%;
+  transition: transform var(--fast) var(--ease-out);
+}
+.avatarLink:active {
+  transform: scale(0.94);
+}
+.who {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--r-sm);
+}
+@media (hover: hover) {
+  .who:hover .name {
+    text-decoration: underline;
+    text-decoration-color: var(--silver);
+    text-underline-offset: 3px;
+  }
+}
+.name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--ink);
+}
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 1px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 10px;
+}
+.category {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 9px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: var(--size-caption);
+  font-weight: 500;
+}
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--success);
+  font-size: var(--size-caption);
+  font-weight: 500;
+}
+.body {
+  padding: 0 16px 12px;
+}
+.textLink {
+  display: block;
+  border-radius: var(--r-xs);
+}
+.more {
+  margin-top: 4px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: var(--size-meta);
+}
+.more:hover {
+  text-decoration: underline;
+}
+.attachment {
+  padding: 0 16px 12px;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-top: 1px solid var(--hairline);
+}
+.footerButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border-radius: 20px;
+  color: var(--text2);
+  font-size: var(--size-meta);
+  font-weight: 500;
+  transition:
+    background-color var(--fast) ease,
+    transform var(--fast) var(--ease-out);
+}
+.footerButton:active {
+  transform: scale(0.92);
+}
+@media (hover: hover) {
+  .footerButton:hover {
+    background: rgba(35, 39, 46, 0.06);
+  }
+}

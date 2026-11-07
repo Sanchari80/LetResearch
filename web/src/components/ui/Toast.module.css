@@ -1,0 +1,64 @@
+.host {
+  position: fixed;
+  top: calc(var(--safe-top) + 8px);
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-float);
+}
+.main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 4px 12px 12px;
+  text-align: left;
+  border-radius: var(--r-lg);
+}
+.icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.title {
+  font-weight: 600;
+  font-size: var(--size-body);
+  color: var(--ink);
+}
+.message {
+  color: var(--text2);
+}
+.close {
+  width: 36px;
+  height: 36px;
+  margin-right: 6px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+@media (hover: hover) {
+  .close:hover {
+    background: rgba(35, 39, 46, 0.06);
+  }
+}

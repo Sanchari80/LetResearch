@@ -1,0 +1,53 @@
+.card {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.title {
+  margin-bottom: 4px;
+}
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 6px;
+  margin: 0 -6px;
+  width: calc(100% + 12px);
+  border-radius: var(--r-md);
+  text-align: left;
+}
+@media (hover: hover) {
+  .row:hover {
+    background: var(--well);
+  }
+}
+.rowIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--well);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.row:hover .rowIcon {
+  background: var(--surface-raised);
+}
+.rowLabel {
+  font-size: var(--size-body);
+  font-weight: 500;
+  color: var(--ink);
+}
+.about {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 12px;
+  margin-top: 6px;
+  border-top: 1px solid var(--hairline);
+}
+.appName {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--ink);
+}

@@ -1,0 +1,29 @@
+# Render Blueprint for the LetResearch API.
+# Render → New → Blueprint → pick this repository. You will only be asked for MONGODB_URI.
+services:
+  - type: web
+    name: letresearch-api
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: REPORT_THRESHOLD
+        value: "3"
+      # Optional – add later under the service's Environment tab:
+      #   ADMIN_EMAILS       your email, to review reported posts
+      #   ANTHROPIC_API_KEY  turns on AI review of post images
+      # Phone notifications (web push) need no settings: the API creates its keys on first start.
+      # To use your own keys, set VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY and VAPID_SUBJECT.

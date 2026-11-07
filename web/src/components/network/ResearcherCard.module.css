@@ -1,0 +1,91 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+.compact {
+  padding: 12px;
+}
+.top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: var(--r-sm);
+}
+@media (hover: hover) {
+  .top:hover .name {
+    text-decoration: underline;
+    text-decoration-color: var(--silver);
+    text-underline-offset: 3px;
+  }
+}
+.name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+  color: var(--ink);
+}
+.reason {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-size: var(--size-meta);
+  font-weight: 500;
+}
+.location {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: -4px;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+.sent {
+  flex: 1;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: var(--size-meta);
+  animation: pop 360ms var(--ease-spring) backwards;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+}
+.rowMain {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: var(--r-sm);
+}
+@media (hover: hover) {
+  .rowMain:hover .name {
+    text-decoration: underline;
+    text-decoration-color: var(--silver);
+    text-underline-offset: 3px;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}

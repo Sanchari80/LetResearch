@@ -1,0 +1,150 @@
+.root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--safe-top) + 32px) 20px calc(var(--safe-bottom) + 24px);
+  background: var(--metal-welcome);
+}
+.body {
+  width: 100%;
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+}
+.intro {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+.wordmark {
+  animation: fade-in 450ms ease 350ms backwards;
+}
+.lead {
+  max-width: 420px;
+  color: var(--ink-soft);
+  animation: fade-down 450ms var(--ease-out) 450ms backwards;
+}
+.buttons {
+  width: 100%;
+  max-width: 380px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: fade-down 450ms var(--ease-out) 600ms backwards;
+}
+.previewWrap {
+  width: 100%;
+  max-width: 420px;
+}
+.preview {
+  background: var(--surface-raised);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-raised);
+  animation: fade-up 500ms var(--ease-out) 500ms backwards;
+}
+.plaque {
+  display: inline-flex;
+  flex-direction: column;
+  border-radius: var(--r-md);
+  padding: 8px 12px;
+  background: var(--metal-plaque);
+}
+.numeral {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  line-height: 28px;
+  color: #eef0f3;
+}
+.plaqueLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #c9ced6;
+}
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+.row {
+  display: flex;
+  gap: 10px;
+  text-align: left;
+  animation: fade-down 320ms var(--ease-out) backwards;
+}
+.index {
+  font-family: var(--font-serif);
+  font-size: var(--size-body);
+  line-height: 21px;
+  color: var(--accent);
+  min-width: 26px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: var(--size-body);
+  line-height: 21px;
+  color: var(--ink);
+}
+.cite {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--size-meta);
+  color: var(--text2);
+}
+.restricted {
+  font-size: var(--size-meta);
+  color: var(--text2);
+}
+.publisher {
+  text-align: center;
+  margin-top: 32px;
+}
+
+@media (min-width: 900px) {
+  .body {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 64px;
+  }
+  .intro {
+    align-items: flex-start;
+    text-align: left;
+    flex: 1;
+    max-width: 500px;
+  }
+  .buttons {
+    width: 360px;
+  }
+  .previewWrap {
+    flex: 1;
+  }
+}
+
+/* Keyframes are local to this module. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+@keyframes fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

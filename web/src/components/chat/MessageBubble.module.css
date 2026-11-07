@@ -1,0 +1,144 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 80%;
+}
+.rowMine {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+.rowTheirs {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+.inRight {
+  animation: in-right 320ms var(--ease-out) backwards;
+}
+.inLeft {
+  animation: in-left 320ms var(--ease-out) backwards;
+}
+.bubble {
+  padding: 9px 14px;
+  max-width: 100%;
+}
+.bubbleMine {
+  background: var(--ink);
+  color: #fff;
+}
+.bubbleTheirs {
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  color: var(--ink);
+}
+.text {
+  font-size: var(--size-body);
+  line-height: 21px;
+  user-select: text;
+}
+.imageWrap {
+  display: block;
+  overflow: hidden;
+  background: var(--bg-deep);
+  cursor: zoom-in;
+}
+.image {
+  width: 230px;
+  height: 230px;
+  object-fit: cover;
+}
+.file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  max-width: 280px;
+  text-align: left;
+}
+.fileIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--r-sm);
+  background: var(--well);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.fileIconMine {
+  background: rgba(255, 255, 255, 0.14);
+}
+.fileName {
+  font-weight: 500;
+  font-size: var(--size-meta);
+}
+.fileMeta {
+  font-size: var(--size-caption);
+  opacity: 0.75;
+}
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 3px;
+  padding: 0 4px;
+}
+.metaMine {
+  justify-content: flex-end;
+}
+.time {
+  font-size: 11px;
+  color: var(--text3);
+}
+.seen {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  animation: rise 200ms var(--ease-out) backwards;
+}
+.retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--danger);
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+  animation: fade 250ms ease backwards;
+}
+.dividerLine {
+  flex: 1;
+  height: 1px;
+  background: var(--hairline);
+}
+
+@keyframes in-right {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+}
+@keyframes in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}

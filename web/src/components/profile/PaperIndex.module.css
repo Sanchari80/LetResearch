@@ -1,0 +1,114 @@
+.wrap {
+  position: relative;
+  padding: 10px 0 6px;
+}
+.notch {
+  position: absolute;
+  top: 4px;
+  right: 52px;
+  z-index: 2;
+  width: 14px;
+  height: 14px;
+  background: var(--surface-raised);
+  transform: rotate(45deg);
+  border-left: 1px solid var(--hairline);
+  border-top: 1px solid var(--hairline);
+}
+.panel {
+  background: var(--surface-raised);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--hairline);
+  box-shadow: var(--shadow-raised);
+  padding: 14px 16px 6px;
+}
+.head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 6px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+}
+.item {
+  animation: rise 260ms var(--ease-out) backwards;
+}
+.item + .item {
+  border-top: 1px solid var(--hairline);
+}
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 0;
+  text-align: left;
+  border-radius: var(--r-sm);
+  transition: transform var(--fast) var(--ease-out);
+}
+.row:active {
+  transform: scale(0.99);
+}
+@media (hover: hover) {
+  a.row:hover .title {
+    text-decoration: underline;
+    text-decoration-color: var(--silver);
+    text-underline-offset: 3px;
+  }
+}
+.index {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: var(--size-body);
+  line-height: 22px;
+  color: var(--accent);
+  min-width: 30px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--ink);
+}
+.titleLocked {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text3);
+}
+.lockedTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.venue {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--size-meta);
+  line-height: 18px;
+  color: var(--text2);
+  min-width: 0;
+}
+.unlock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--steel-soft);
+  border-radius: var(--r-md);
+  padding: 12px;
+  margin: 4px 0 10px;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <title>LetResearch</title>
+    <meta
+      name="description"
+      content="Share research, curate your paper index and chat with researchers. Published by SKT Software Land."
+    />
+    <meta name="theme-color" content="#E9EBEE" />
+    <meta name="color-scheme" content="light" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon-v2.ico" sizes="16x16 32x32 48x48 64x64" />
+    <link rel="icon" type="image/png" href="/icons/icon-16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/icons/icon-32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/icons/icon-48.png" sizes="48x48" />
+    <link rel="icon" type="image/png" href="/icons/icon-64.png" sizes="64x64" />
+    <link rel="icon" type="image/png" href="/icons/icon-192.png" sizes="192x192" />
+    <link rel="icon" type="image/png" href="/icons/icon-512.png" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="msapplication-TileColor" content="#E9EBEE" />
+    <meta name="msapplication-TileImage" content="/icons/icon-144.png" />
+    <meta name="application-name" content="LetResearch" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="LetResearch" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta property="og:title" content="LetResearch" />
+    <meta property="og:description" content="The academic research network. Published by SKT Software Land." />
+    <meta property="og:image" content="/icons/icon-512.png" />
+    <style>
+      /* Shown until the app starts: silver background, no white flash. */
+      html,
+      body {
+        background: #e9ebee;
+        margin: 0;
+      }
+    </style>
+    <script>
+      // Keep the browser's install offer so the app can show its own "Install app" button.
+      window.addEventListener('beforeinstallprompt', function (event) {
+        event.preventDefault();
+        window.__letresearchInstallPrompt = event;
+        window.dispatchEvent(new Event('letresearch:installable'));
+      });
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to use LetResearch.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

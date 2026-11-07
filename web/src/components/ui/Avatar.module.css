@@ -1,0 +1,58 @@
+.avatar {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(150deg, #e4e7eb 10%, #c9ced6 90%);
+}
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 220ms ease;
+}
+.image[data-loaded] {
+  opacity: 1;
+}
+.initials {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink-soft);
+  user-select: none;
+}
+.dotWrap {
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
+.halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--success);
+  animation: halo 1.8s ease-in-out infinite;
+}
+.dot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--success);
+  border: 2px solid var(--surface);
+}
+
+@keyframes halo {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.25;
+  }
+}

@@ -1,0 +1,193 @@
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 600;
+  white-space: nowrap;
+  user-select: none;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition:
+    transform var(--fast) var(--ease-out),
+    background-color var(--fast) ease,
+    border-color var(--fast) ease,
+    opacity var(--fast) ease,
+    box-shadow var(--fast) ease;
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.btn:disabled:not([data-loading]) {
+  opacity: 0.45;
+  cursor: default;
+}
+.btn:focus-visible {
+  border-radius: 10px;
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hidden {
+  visibility: hidden;
+}
+.spinnerWrap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.sm {
+  height: 34px;
+  padding: 0 12px;
+  font-size: var(--size-meta);
+}
+.md {
+  height: 44px;
+  padding: 0 16px;
+  font-size: var(--size-body);
+}
+.lg {
+  height: 52px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+.full {
+  width: 100%;
+}
+
+.primary {
+  background: var(--ink);
+  color: #fff;
+}
+.accent {
+  background: var(--accent);
+  color: #fff;
+}
+.secondary {
+  background: var(--surface-raised);
+  color: var(--ink);
+  border-color: var(--border);
+}
+.ghost {
+  background: transparent;
+  color: var(--ink);
+}
+.danger {
+  background: var(--surface-raised);
+  color: var(--danger);
+  border-color: #e3b9b5;
+}
+.soft {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+@media (hover: hover) {
+  .primary:hover:not(:disabled) {
+    background: #353b44;
+  }
+  .accent:hover:not(:disabled) {
+    background: var(--accent-pressed);
+  }
+  .secondary:hover:not(:disabled) {
+    background: #f3f4f6;
+    border-color: var(--silver);
+  }
+  .ghost:hover:not(:disabled) {
+    background: rgba(35, 39, 46, 0.06);
+  }
+  .danger:hover:not(:disabled) {
+    background: var(--danger-soft);
+  }
+  .soft:hover:not(:disabled) {
+    background: #cfe2de;
+  }
+}
+
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: spin 0.7s linear infinite;
+}
+
+.iconBtn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    transform var(--fast) var(--ease-out),
+    background-color var(--fast) ease,
+    opacity var(--fast) ease;
+}
+.iconBtn:active:not(:disabled) {
+  transform: scale(0.9);
+}
+.iconBtn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.iconBtn:focus-visible {
+  border-radius: 50%;
+}
+@media (hover: hover) {
+  .iconBtn:hover:not(:disabled) {
+    background-color: rgba(35, 39, 46, 0.07);
+  }
+}
+.bordered {
+  border-color: var(--hairline);
+}
+
+.badge {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 9px;
+  background: var(--danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--bg);
+  animation: zoom-in 300ms var(--ease-spring) backwards;
+}
+
+/* Keyframes are local to each CSS module. */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}

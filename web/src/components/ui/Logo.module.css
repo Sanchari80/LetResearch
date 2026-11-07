@@ -1,0 +1,20 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+}
+.wordmark {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+.animated {
+  animation: logo-appear 560ms var(--ease-spring) backwards;
+}
+
+@keyframes logo-appear {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+}
