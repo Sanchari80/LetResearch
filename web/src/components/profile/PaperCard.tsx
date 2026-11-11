@@ -36,14 +36,26 @@ export function PaperCard({ paper, index, signedIn }: { paper: PaperSummary; ind
       </Link>
       <div className={styles.badges}>
         <AccessBadge label={`View: ${visibilityLabel(paper.viewAccess)}`} value={paper.viewAccess} icon={IconEye} />
-        <AccessBadge label={`Download: ${downloadLabel(paper.downloadAccess)}`} value={paper.downloadAccess} icon={IconDownload} />
+        <AccessBadge
+          label={
+            paper.downloadAccess === 'paid'
+              ? paper.pricing
+                ? `Full text: $${paper.pricing.amount.toFixed(2)} ${paper.pricing.currency}`
+                : 'Full text: price unavailable'
+              : `Download: ${downloadLabel(paper.downloadAccess)}`
+          }
+          value={paper.downloadAccess}
+          icon={IconDownload}
+        />
       </div>
       <div className={styles.actions}>
         {blocked ? (
           <span className={styles.blocked}>
             <IconLock size={14} color={colors.text2} aria-hidden />
             <span className="t-caption grow">
-              {!signedIn
+              {paper.downloadAccess === 'paid'
+                ? `Full paper · ${paper.pricing ? `$${paper.pricing.amount.toFixed(2)} ${paper.pricing.currency}` : 'price unavailable'}. Title and abstract are free; checkout is coming soon.`
+                : !signedIn
                 ? 'Sign in to download'
                 : paper.downloadAccess === 'none'
                   ? 'Downloads are off for this paper'

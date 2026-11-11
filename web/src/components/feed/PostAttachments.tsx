@@ -68,7 +68,11 @@ export function PaperAttachment({ paper, signedIn }: { paper: PostPaper; signedI
         ) : (
           <span className={styles.noDownload}>
             <IconLock size={13} color={colors.text3} aria-hidden />
-            <span className="t-caption">Download restricted</span>
+            <span className="t-caption">
+              {paper.downloadAccess === 'paid'
+                ? `Paid access · ${paper.pricing ? `$${paper.pricing.amount.toFixed(2)} ${paper.pricing.currency}` : 'price unavailable'} · checkout coming soon`
+                : 'Download restricted'}
+            </span>
           </span>
         )}
       </div>

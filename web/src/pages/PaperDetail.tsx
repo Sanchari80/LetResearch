@@ -127,13 +127,15 @@ export default function PaperDetailPage() {
                     size="lg"
                     onClick={() => downloadPaper(paper.id, { signedIn, kind: paper.kind })}
                   />
-                ) : (
+                ) : paper.downloadAccess !== 'paid' ? (
                   <p className={styles.blocked}>
                     <IconLock size={16} color={colors.text2} aria-hidden />
                     <span className="t-meta">{query.data?.downloadNote}</span>
                   </p>
-                )}
-                {!signedIn && !paper.canDownload ? <Button label="Sign in" variant="secondary" to="/login" /> : null}
+                ) : null}
+                {!signedIn && !paper.canDownload && paper.downloadAccess !== 'paid' ? (
+                  <Button label="Sign in" variant="secondary" to="/login" />
+                ) : null}
                 {paper.isOwner ? (
                   <>
                     <Button label="Share to feed" icon={IconShare} variant="secondary" to={`/compose?paperId=${paper.id}`} />
@@ -147,6 +149,19 @@ export default function PaperDetailPage() {
                   onClick={() => copyToClipboard(paperLink(paper.id), 'Paper link copied')}
                 />
               </div>
+
+              {paper.downloadAccess === 'paid' && !paper.isOwner ? (
+                <Card as="section" className={`col gap-8 ${styles.paidAccess}`}>
+                  <h2 className="t-title">
+                    Full paper · {paper.pricing ? `$${paper.pricing.amount.toFixed(2)} ${paper.pricing.currency}` : 'price unavailable'}
+                  </h2>
+                  <p className="t-meta">
+                    The title and abstract are free to read. The full paper will require paid access; checkout is not
+                    available yet.
+                  </p>
+                  <Button label="Paid access coming soon" icon={IconLock} disabled variant="secondary" />
+                </Card>
+              ) : null}
 
               {paper.abstract ? (
                 <section className="col gap-6">

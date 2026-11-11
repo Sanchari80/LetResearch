@@ -6,11 +6,16 @@ import { uploadPaperFile } from '../middleware/upload.js';
 import { Notification, Paper, PaperDownload, Post } from '../models/index.js';
 import { deleteFile, saveFile, signedFileUrl } from '../services/files.js';
 import { notify, pushCounts } from '../services/notify.js';
+import { paperPricing } from '../services/paper-pricing.js';
 import { canDownloadPaper, canViewPaper, downloadBlockReason, getRelation } from '../services/privacy.js';
 import { paperDetail, paperSummary, SUMMARY_FIELDS, userSummary } from '../services/serializers.js';
 import { badRequest, cleanList, cleanText, forbidden, HttpError, normalizeUrl, notFound, parseBool } from '../utils/http.js';
 
 const router = Router();
+
+router.get('/pricing', (_req, res) => {
+  res.json({ pricing: paperPricing() });
+});
 
 function readPaperFields(body, { partial = false } = {}) {
   const fields = {};
@@ -64,6 +69,9 @@ router.post('/', requireAuth, uploadPaperFile, async (req, res) => {
   const body = req.body || {};
   const kind = body.kind === 'link' ? 'link' : 'file';
   const fields = readPaperFields(body);
+  if (kind === 'link' && fields.downloadAccess === 'paid') {
+    throw badRequest('Paid access is available only for uploaded paper files.', 'PAID_LINK_UNSUPPORTED');
+  }
 
   if (kind === 'file') {
     if (!req.file) throw badRequest('Attach the paper as a PDF or Word file.', 'NO_FILE');
@@ -140,6 +148,9 @@ router.get('/:id', optionalAuth, async (req, res) => {
 router.patch('/:id', requireAuth, uploadPaperFile, async (req, res) => {
   const paper = await loadOwnPaper(req.params.id, req.userId);
   const fields = readPaperFields(req.body || {}, { partial: true });
+  if (paper.kind === 'link' && fields.downloadAccess === 'paid') {
+    throw badRequest('Paid access is available only for uploaded paper files.', 'PAID_LINK_UNSUPPORTED');
+  }
   if (paper.kind === 'link' && req.body?.link !== undefined) {
     const link = normalizeUrl(req.body.link);
     if (!link) throw badRequest('Enter a valid DOI, arXiv or journal link.', 'INVALID_LINK');

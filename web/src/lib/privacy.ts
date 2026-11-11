@@ -17,6 +17,7 @@ export const DOWNLOAD_ACCESS_OPTIONS: { value: PaperDownloadAccess; label: strin
   { value: 'everyone', label: 'Everyone', description: 'Any signed-in researcher who can view it.' },
   { value: 'connections', label: 'Connections', description: 'Only your connections can download.' },
   { value: 'none', label: 'No one', description: 'Downloads are turned off.' },
+  { value: 'paid', label: 'Paid access', description: 'Title and abstract stay free; full-text checkout is coming soon.' },
 ];
 
 export function visibilityLabel(value: Visibility) {
@@ -31,6 +32,7 @@ export function downloadLabel(value: PaperDownloadAccess) {
 export function visibilityTone(value: Visibility | PaperDownloadAccess | string) {
   if (value === 'public' || value === 'everyone') return { fg: colors.accent, bg: colors.accentSoft };
   if (value === 'connections') return { fg: colors.steel, bg: colors.steelSoft };
+  if (value === 'paid') return { fg: colors.accent, bg: colors.accentSoft };
   return { fg: colors.inkSoft, bg: '#E2E4E8' };
 }
 

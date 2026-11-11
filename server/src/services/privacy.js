@@ -50,6 +50,7 @@ export function canDownloadPaper(paper, status) {
   if (status === 'self') return true;
   if (status === 'anonymous') return false;
   if (!canViewPaper(paper, status)) return false;
+  if (paper.downloadAccess === 'paid') return false;
   if (paper.downloadAccess === 'everyone') return true;
   if (paper.downloadAccess === 'connections') return status === 'connected';
   return false;
@@ -57,6 +58,7 @@ export function canDownloadPaper(paper, status) {
 
 /** Explains why a download is blocked, in plain language for the app. */
 export function downloadBlockReason(paper, status) {
+  if (paper.downloadAccess === 'paid') return 'The full paper is paid. Title and abstract are free; checkout is coming soon.';
   if (status === 'anonymous') return 'Sign in to download this paper.';
   if (paper.downloadAccess === 'none') return 'The author has turned off downloads for this paper.';
   if (paper.downloadAccess === 'connections') return 'Only connections can download this paper.';

@@ -25,7 +25,7 @@ import { usePageTitle, useShake } from '@/lib/hooks';
 import { goBack } from '@/lib/nav';
 import { PAPER_TYPES, pickDocument, toUpload } from '@/lib/pickers';
 import { DOWNLOAD_ACCESS_OPTIONS, VIEW_ACCESS_OPTIONS } from '@/lib/privacy';
-import { keys, usePaper } from '@/lib/queries';
+import { keys, usePaper, usePaperPricing } from '@/lib/queries';
 import type { PaperDownloadAccess, PaperViewAccess } from '@/lib/types';
 import { toast } from '@/store/toast';
 import { colors } from '@/theme';
@@ -41,6 +41,7 @@ export default function PaperEditorPage() {
   usePageTitle(editing ? 'Edit paper' : 'Add a paper');
   const queryClient = useQueryClient();
   const existing = usePaper(id);
+  const pricing = usePaperPricing();
   const [kind, setKind] = useState<'file' | 'link'>('file');
   const [file, setFile] = useState<UploadFile | null>(null);
   const [link, setLink] = useState('');
@@ -137,6 +138,7 @@ export default function PaperEditorPage() {
   const save = async (event?: FormEvent) => {
     event?.preventDefault();
     if (saving) return;
+    if (downloadAccess === 'paid' && !pricing.data) return fail('Could not load paid-paper pricing. Check your connection and try again.');
     if (title.trim().length < 3) return fail('Enter the paper title.');
     if (!editing && kind === 'file' && !file) return fail('Attach the paper as a PDF or Word file.');
     if (kind === 'link' && !link.trim() && !doi.trim() && !editing) return fail('Add a DOI, arXiv or journal link.');
@@ -231,7 +233,10 @@ export default function PaperEditorPage() {
           <Segmented
             label="Paper source"
             value={kind}
-            onChange={setKind}
+            onChange={(next) => {
+              setKind(next);
+              if (next === 'link' && downloadAccess === 'paid') setDownloadAccess('everyone');
+            }}
             options={[
               { value: 'file', label: 'Upload a file' },
               { value: 'link', label: 'Add a link' },
@@ -367,14 +372,28 @@ export default function PaperEditorPage() {
           </h2>
           <OptionList
             label={`Who can ${kind === 'link' ? 'open the link' : 'download it'}`}
-            options={DOWNLOAD_ACCESS_OPTIONS}
+            options={
+              kind === 'file'
+                ? DOWNLOAD_ACCESS_OPTIONS
+                : DOWNLOAD_ACCESS_OPTIONS.filter((option) => option.value !== 'paid')
+            }
             value={downloadAccess}
             onSelect={(v) => {
               feedback.toggle();
               setDownloadAccess(v);
             }}
           />
-          <p className="t-caption">You get a notification every time someone downloads your paper.</p>
+          {downloadAccess === 'paid' ? (
+            <InlineNotice tone="warning" icon={IconCircleAlert}>
+              {pricing.data
+                ? `Fixed price: $${pricing.data.amount.toFixed(2)} USD. Platform fee: $${pricing.data.platformFee.toFixed(2)} (${pricing.data.platformFeePercent}%). Your share: $${pricing.data.researcherAmount.toFixed(2)}. Readers can preview the title and abstract; payment checkout is not connected yet.`
+                : pricing.isError
+                  ? 'Paid-paper pricing could not be loaded. Retry before saving this access setting.'
+                  : 'Loading the fixed price and revenue split…'}
+            </InlineNotice>
+          ) : (
+            <p className="t-caption">You get a notification every time someone downloads your paper.</p>
+          )}
         </Card>
 
         <Card>

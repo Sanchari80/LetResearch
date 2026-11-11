@@ -4,7 +4,7 @@ import { POST_CATEGORIES, POST_KINDS } from '../constants.js';
 import { isValidId } from '../db.js';
 import { isAdmin, optionalAuth, requireAuth } from '../middleware/auth.js';
 import { uploadPostMedia } from '../middleware/upload.js';
-import { Comment, Notification, Paper, Post } from '../models/index.js';
+import { Comment, Notification, Paper, Post, User } from '../models/index.js';
 import { deleteFile, saveFile } from '../services/files.js';
 import { moderateComment, moderatePost } from '../services/moderation.js';
 import { notify, retractNotifications } from '../services/notify.js';
@@ -44,6 +44,19 @@ async function renderPosts(posts, ctx) {
     ctx.viewerId,
   );
   return posts.map((p) => postView(p, { ...ctx, likedIds: liked }));
+}
+
+async function notifyMentions(text, { actor, post, type, allowedIds = null, excludeIds = [] }) {
+  const usernames = [...text.matchAll(/(?:^|[\s([{])@([a-z0-9._-]{3,30})(?=$|[\s.,!?;:)\]}])/gi)]
+    .map((match) => match[1].toLowerCase());
+  if (!usernames.length) return;
+  const excluded = new Set([String(actor), ...excludeIds.map(String)]);
+  const users = await User.find({ username: { $in: [...new Set(usernames)] } }).select('_id').lean();
+  await Promise.all(
+    users
+      .filter((user) => !excluded.has(String(user._id)) && (!allowedIds || allowedIds.has(String(user._id))))
+      .map((user) => notify({ recipient: user._id, actor, type, post })),
+  );
 }
 
 function canSeePost(post, ctx, viewer) {
@@ -165,6 +178,8 @@ router.post('/', requireAuth, uploadPostMedia, async (req, res) => {
   }
 
   await post.save();
+  const connectedIds = audience === 'connections' ? new Set((await getConnectionIds(req.userId)).map(String)) : null;
+  await notifyMentions(text, { actor: req.userId, post: post._id, type: 'post_mention', allowedIds: connectedIds });
   const saved = await Post.findById(post._id).populate('author', SUMMARY_FIELDS).populate('paper', PAPER_FIELDS).lean();
   const ctx = await viewerContext(req.userId);
   res.status(201).json({ post: postView(saved, { ...ctx, likedIds: new Set() }) });
@@ -230,6 +245,14 @@ router.post('/:id/comments', requireAuth, async (req, res) => {
   const comment = await Comment.create({ post: post._id, author: req.userId, text });
   await Post.updateOne({ _id: post._id }, { $inc: { commentCount: 1 } });
   await notify({ recipient: post.author, actor: req.userId, type: 'post_comment', post: post._id, snippet: text.slice(0, 90) });
+  const connectedIds = post.audience === 'connections' ? new Set((await getConnectionIds(post.author)).map(String)) : null;
+  await notifyMentions(text, {
+    actor: req.userId,
+    post: post._id,
+    type: 'comment_mention',
+    allowedIds: connectedIds,
+    excludeIds: [post.author],
+  });
   const populated = await Comment.findById(comment._id).populate('author', SUMMARY_FIELDS).lean();
   res.status(201).json({ comment: commentView(populated, req.userId) });
 });

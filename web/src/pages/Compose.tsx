@@ -19,6 +19,7 @@ import {
   IconX,
   type IconProps,
 } from '@/components/icons';
+import { MentionInput } from '@/components/mentions/MentionInput';
 import { OptionList } from '@/components/privacy/PrivacyControls';
 import { Button, Card, Chip, confirm, IconButton, InlineNotice, LoadingRow, PageHeader, ProgressBar, TextField } from '@/components/ui';
 import { api, ApiError, errorMessage, upload, type UploadFile } from '@/lib/api';
@@ -263,7 +264,8 @@ export default function ComposePage() {
           {step === 1 ? (
             <>
               <h2 className="t-heading">{KINDS.find((k) => k.kind === kind)?.title}</h2>
-              <TextField
+              <MentionInput
+                mode="post"
                 label={kind === 'media' ? 'Describe the research context' : 'Your post'}
                 placeholder={
                   kind === 'media'
@@ -276,7 +278,6 @@ export default function ComposePage() {
                 }
                 value={text}
                 onChange={setText}
-                multiline
                 minRows={5}
                 maxLength={3000}
                 counter={3000}

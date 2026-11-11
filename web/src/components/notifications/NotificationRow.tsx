@@ -11,6 +11,7 @@ import { toast } from '@/store/toast';
 import { colors } from '@/theme';
 import {
   IconDownload,
+  IconAtSign,
   IconFlag,
   IconHeart,
   IconMessageCircle,
@@ -30,6 +31,8 @@ const TYPE_STYLE: Record<AppNotification['type'], { icon: ComponentType<IconProp
   message_request_accepted: { icon: IconMessageCircle, color: colors.accent },
   post_like: { icon: IconHeart, color: colors.like },
   post_comment: { icon: IconMessageSquare, color: colors.steel },
+  post_mention: { icon: IconAtSign, color: colors.accent },
+  comment_mention: { icon: IconAtSign, color: colors.accent },
   paper_download: { icon: IconDownload, color: colors.accent },
   post_flagged: { icon: IconFlag, color: colors.warning },
   post_removed: { icon: IconFlag, color: colors.danger },

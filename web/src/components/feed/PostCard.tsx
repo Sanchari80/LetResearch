@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 import { Link } from 'react-router';
 import { shareLink, copyToClipboard } from '@/lib/actions';
+import { MentionText } from '@/components/mentions/MentionText';
 import { api, errorMessage } from '@/lib/api';
 import { postLink } from '@/lib/config';
 import { feedback } from '@/lib/feedback';
@@ -112,7 +113,7 @@ function PostCardBase({ post, signedIn, detail, onCommentClick }: Props) {
   const AudienceIcon = post.audience === 'public' ? IconGlobe : IconUsers;
   const text = (
     <p className={`t-body pre-wrap ${!expanded && long ? 'clamp-6' : ''}`} style={{ color: colors.ink }}>
-      {post.text}
+      <MentionText text={post.text} />
     </p>
   );
 
@@ -154,9 +155,20 @@ function PostCardBase({ post, signedIn, detail, onCommentClick }: Props) {
           {detail ? (
             text
           ) : (
-            <Link to={`/post/${post.id}`} className={styles.textLink}>
+            <div
+              className={styles.textLink}
+              role="link"
+              tabIndex={0}
+              onClick={() => navigate(`/post/${post.id}`)}
+              onKeyDown={(event) => {
+                if (event.target === event.currentTarget && (event.key === 'Enter' || event.key === ' ')) {
+                  event.preventDefault();
+                  navigate(`/post/${post.id}`);
+                }
+              }}
+            >
               {text}
-            </Link>
+            </div>
           )}
           {long && !expanded ? (
             <button

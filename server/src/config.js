@@ -10,6 +10,16 @@ try {
 
 const env = process.env;
 const isProduction = env.NODE_ENV === 'production';
+const paperPriceUsd = env.PAPER_PRICE_USD === undefined ? 4.99 : Number(env.PAPER_PRICE_USD);
+const paperPlatformFeePercent =
+  env.PAPER_PLATFORM_FEE_PERCENT === undefined ? 20 : Number(env.PAPER_PLATFORM_FEE_PERCENT);
+
+if (!Number.isFinite(paperPriceUsd) || paperPriceUsd <= 0) {
+  throw new Error('PAPER_PRICE_USD must be a positive number.');
+}
+if (!Number.isFinite(paperPlatformFeePercent) || paperPlatformFeePercent < 0 || paperPlatformFeePercent > 100) {
+  throw new Error('PAPER_PLATFORM_FEE_PERCENT must be between 0 and 100.');
+}
 
 function list(value) {
   return (value || '')
@@ -41,6 +51,8 @@ export const config = {
   corsOrigins: list(env.CORS_ORIGIN).length ? list(env.CORS_ORIGIN) : ['*'],
   adminEmails: list(env.ADMIN_EMAILS).map((e) => e.toLowerCase()),
   reportThreshold: Number(env.REPORT_THRESHOLD) || 3,
+  paperPriceUsd,
+  paperPlatformFeePercent,
   moderation: {
     // Optional AI image + text review. Leave empty to use the built-in rule engine only.
     anthropicApiKey: env.ANTHROPIC_API_KEY || '',

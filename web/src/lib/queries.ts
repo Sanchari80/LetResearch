@@ -10,6 +10,7 @@ import type {
   Message,
   Page,
   PaperDetail,
+  PaperPricing,
   PaperSummary,
   Post,
   ProfileResponse,
@@ -36,6 +37,7 @@ export const keys = {
   post: (id: string) => ['post', id] as const,
   comments: (postId: string) => ['comments', postId] as const,
   myPapers: ['papers', 'mine'] as const,
+  paperPricing: ['paperPricing'] as const,
   paper: (id: string) => ['paper', id] as const,
   paperDownloads: (id: string) => ['paperDownloads', id] as const,
   connections: ['connections'] as const,
@@ -104,6 +106,14 @@ export function useMyPapers(enabled = true) {
     queryKey: keys.myPapers,
     queryFn: () => api<{ papers: PaperSummary[] }>('/api/papers/mine').then((r) => r.papers),
     enabled,
+  });
+}
+
+export function usePaperPricing() {
+  return useQuery({
+    queryKey: keys.paperPricing,
+    queryFn: () => api<{ pricing: PaperPricing }>('/api/papers/pricing').then((r) => r.pricing),
+    staleTime: 5 * 60 * 1000,
   });
 }
 

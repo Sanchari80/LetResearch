@@ -2,8 +2,11 @@
   position: relative;
   display: inline-grid;
   place-items: center;
+  flex: 0 0 auto;
   flex-shrink: 0;
+  aspect-ratio: 1;
   border-radius: 50%;
+  overflow: hidden;
   background: linear-gradient(150deg, #e4e7eb 10%, #c9ced6 90%);
 }
 .image {

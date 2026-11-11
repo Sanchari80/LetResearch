@@ -56,6 +56,8 @@
 .avatarStatic {
   position: relative;
   display: inline-flex;
+  flex: 0 0 auto;
+  align-self: flex-start;
   border-radius: 50%;
   animation: fade 350ms ease backwards;
 }
@@ -78,15 +80,21 @@
   place-items: center;
 }
 .plaqueWrap {
+  align-self: flex-end;
   padding-bottom: 4px;
   animation: rise 320ms var(--ease-out) 120ms backwards;
 }
 .identity {
-  margin-top: 12px;
+  margin-top: 16px;
   display: flex;
   flex-direction: column;
   gap: 4px;
   animation: rise 320ms var(--ease-out) 60ms backwards;
+}
+@media (min-width: 900px) {
+  .identity {
+    margin-top: 14px;
+  }
 }
 .name {
   font-family: var(--font-serif);

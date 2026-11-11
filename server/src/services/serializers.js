@@ -4,6 +4,7 @@ import { DEFAULT_VISIBILITY, LINK_FIELDS, NOTIFICATION_CATEGORY, PROFILE_FIELDS 
 import { isOnline } from '../realtime/socket.js';
 import { publicFileUrl, signedFileUrl } from './files.js';
 import { canDownloadPaper, canSee, canViewPaper } from './privacy.js';
+import { paperPricing } from './paper-pricing.js';
 
 /** Fields to select when a lightweight user summary is needed. */
 export const SUMMARY_FIELDS =
@@ -98,6 +99,7 @@ export function paperSummary(paper, status) {
     linkHost: paper.kind === 'link' ? hostOf(paper.link) : '',
     viewAccess: paper.viewAccess,
     downloadAccess: paper.downloadAccess,
+    pricing: paper.downloadAccess === 'paid' ? paperPricing() : null,
     showOnProfile: paper.showOnProfile,
     order: paper.order,
     canDownload: canDownloadPaper(paper, status),
@@ -158,6 +160,8 @@ export function postView(post, { viewerId, connectedIds = new Set(), likedIds = 
           authors: post.paper.authors || [],
           kind: post.paper.kind,
           canDownload: canDownloadPaper(post.paper, status),
+          downloadAccess: post.paper.downloadAccess || 'everyone',
+          pricing: post.paper.downloadAccess === 'paid' ? paperPricing() : null,
         }
       : { locked: true, id: null };
   } else if (post.kind === 'paper') {
@@ -252,6 +256,8 @@ const NOTIFICATION_TEXT = {
   message_request_accepted: () => 'accepted your message request',
   post_like: () => 'liked your post',
   post_comment: (n) => (n.snippet ? `commented on your post: “${n.snippet}”` : 'commented on your post'),
+  post_mention: () => 'mentioned you in a post',
+  comment_mention: () => 'mentioned you in a comment',
   paper_download: (n) =>
     n.snippet === 'link'
       ? `opened the link to your paper “${n.paper?.title || 'a paper'}”`

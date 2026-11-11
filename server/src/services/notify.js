@@ -95,6 +95,8 @@ export function notificationUrl(view) {
       return view.paper ? `/paper/${view.paper.id}` : '/papers';
     case 'post_like':
     case 'post_comment':
+    case 'post_mention':
+    case 'comment_mention':
     case 'post_flagged':
     case 'post_restored':
     case 'post_removed':

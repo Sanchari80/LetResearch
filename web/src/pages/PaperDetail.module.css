@@ -87,6 +87,10 @@
   border-radius: var(--r-sm);
   background: var(--well);
 }
+.paidAccess {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
 .abstract {
   font-family: var(--font-serif);
   font-size: 16px;

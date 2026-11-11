@@ -4,6 +4,8 @@ import { useLayoutEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useParams } from 'react-router';
 import { PostCard } from '@/components/feed/PostCard';
 import { IconCircleAlert, IconMessageSquare, IconSend, IconTrash } from '@/components/icons';
+import { MentionInput } from '@/components/mentions/MentionInput';
+import { MentionText } from '@/components/mentions/MentionText';
 import { Avatar, Button, confirm, EmptyState, ErrorState, IconButton, InlineNotice, PostSkeleton } from '@/components/ui';
 import { api, ApiError, errorMessage } from '@/lib/api';
 import { feedback } from '@/lib/feedback';
@@ -121,7 +123,7 @@ export default function PostDetailPage() {
                       ) : null}
                     </div>
                     <p className="t-body pre-wrap" style={{ color: colors.inkSoft }}>
-                      {comment.text}
+                      <MentionText text={comment.text} />
                     </p>
                   </div>
                 </motion.li>
@@ -141,14 +143,14 @@ export default function PostDetailPage() {
             ) : null}
             <div className={styles.composerRow}>
               <Avatar name={user?.name} url={user?.avatarUrl} size={34} />
-              <textarea
-                ref={inputRef}
-                rows={1}
+              <MentionInput
+                mode="comment"
                 value={text}
-                onChange={(e) => {
-                  setText(e.target.value);
+                onChange={(value) => {
+                  setText(value);
                   if (reasons.length) setReasons([]);
                 }}
+                textareaRef={inputRef}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing && !isTouchDevice()) {
                     e.preventDefault();
@@ -156,9 +158,8 @@ export default function PostDetailPage() {
                   }
                 }}
                 placeholder="Add a comment…"
-                aria-label="Add a comment"
+                ariaLabel="Add a comment"
                 maxLength={1500}
-                className={styles.input}
               />
               <IconButton
                 icon={IconSend}

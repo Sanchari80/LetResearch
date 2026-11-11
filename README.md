@@ -59,7 +59,8 @@ LetResearch/
 **Research papers**
 - Upload PDF or Word files (up to 20 MB, or drag a file onto the upload area on a computer) or add a DOI / arXiv / journal link.
 - Per-paper **view access**: Public, Connections, Only me.
-- Per-paper **download access**: Everyone, Connections, No one.
+- Per-paper **download access**: Everyone, Connections, No one, or Paid for uploaded files. Paid papers keep their title and abstract free; the full file stays locked until checkout is connected.
+- Paid access currently displays a fixed **$4.99 USD** price and a **20%** platform-fee split (**$1.00** platform / **$3.99** researcher). This is a preview only: no payment is collected and no buyer can unlock a file yet. The paper owner can still download their own upload.
 - Downloads use short-lived signed links. The author is notified instantly – **"X downloaded your research paper"** – with a sound and vibration, and can see the full download history.
 
 **Academic feed with strict moderation**
@@ -261,6 +262,8 @@ PWABuilder wraps the deployed PWA in a real Android app (a Trusted Web Activity)
 | `CORS_ORIGIN` | no | Allowed web origins, comma separated, or `*` |
 | `ADMIN_EMAILS` | no | Emails that get moderator access (review reported posts) |
 | `REPORT_THRESHOLD` | no | Reports needed to hide a post (default 3) |
+| `PAPER_PRICE_USD` | no | Fixed displayed price for paid uploaded papers (default `4.99`; checkout is not enabled) |
+| `PAPER_PLATFORM_FEE_PERCENT` | no | Displayed platform share of a future paid-paper sale (default `20`) |
 | `ANTHROPIC_API_KEY` | no | Turns on AI review of post images |
 | `ANTHROPIC_MODEL` | no | Model for AI review (default `claude-haiku-5-5`) |
 | `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT` | no | Your own notification keys (created automatically when empty) |
@@ -308,7 +311,7 @@ PWABuilder wraps the deployed PWA in a real Android app (a Trusted Web Activity)
 | --- | --- |
 | Auth | `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/me`, `POST /api/auth/change-password` |
 | Profiles | `GET /api/users/:username`, `PATCH /api/users/me`, `PATCH /api/users/me/visibility`, `POST/DELETE /api/users/me/avatar`, `POST/DELETE /api/users/me/cover`, `GET /api/users/search`, `GET /api/users/suggestions`, `GET /api/users/:username/connections`, `GET /api/users/me/counts` |
-| Papers | `GET /api/papers/mine`, `POST /api/papers`, `GET/PATCH/DELETE /api/papers/:id`, `PUT /api/papers/order`, `POST /api/papers/:id/download`, `GET /api/papers/:id/downloads` |
+| Papers | `GET /api/papers/pricing`, `GET /api/papers/mine`, `POST /api/papers`, `GET/PATCH/DELETE /api/papers/:id`, `PUT /api/papers/order`, `POST /api/papers/:id/download`, `GET /api/papers/:id/downloads` |
 | Connections | `GET /api/connections`, `GET /api/connections/requests`, `POST /api/connections/request`, `POST /api/connections/:id/accept`, `POST /api/connections/:id/decline`, `DELETE /api/connections/:id` |
 | Messages | `GET /api/conversations?box=inbox\|requests`, `POST /api/conversations/open`, `GET /api/conversations/:id`, `GET/POST /api/conversations/:id/messages`, `POST /api/conversations/:id/read`, `POST /api/conversations/:id/accept`, `POST /api/conversations/:id/decline` |
 | Feed | `GET /api/posts/feed`, `GET /api/posts/user/:userId`, `POST /api/posts`, `GET/DELETE /api/posts/:id`, `POST /api/posts/:id/like`, `GET/POST /api/posts/:id/comments`, `DELETE /api/posts/:id/comments/:commentId`, `POST /api/posts/:id/report` |

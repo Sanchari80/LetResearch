@@ -2,7 +2,16 @@
 
 export type Visibility = 'public' | 'connections' | 'private';
 export type PaperViewAccess = 'public' | 'connections' | 'private';
-export type PaperDownloadAccess = 'everyone' | 'connections' | 'none';
+export type PaperDownloadAccess = 'everyone' | 'connections' | 'none' | 'paid';
+
+export interface PaperPricing {
+  currency: 'USD';
+  amount: number;
+  platformFeePercent: number;
+  platformFee: number;
+  researcherAmount: number;
+  checkoutEnabled: boolean;
+}
 
 export type ProfileField = 'qualification' | 'institution' | 'location' | 'bio' | 'interests';
 export type LinkField =
@@ -78,6 +87,7 @@ export interface PaperSummary {
   linkHost: string;
   viewAccess: PaperViewAccess;
   downloadAccess: PaperDownloadAccess;
+  pricing: PaperPricing | null;
   showOnProfile: boolean;
   order: number;
   canDownload: boolean;
@@ -117,6 +127,8 @@ export interface PostPaper {
   authors?: string[];
   kind?: 'file' | 'link';
   canDownload?: boolean;
+  downloadAccess?: PaperDownloadAccess;
+  pricing?: PaperPricing | null;
 }
 
 export interface Post {
@@ -197,6 +209,8 @@ export interface AppNotification {
     | 'message_request_accepted'
     | 'post_like'
     | 'post_comment'
+    | 'post_mention'
+    | 'comment_mention'
     | 'paper_download'
     | 'post_flagged'
     | 'post_removed'

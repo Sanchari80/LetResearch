@@ -22,6 +22,10 @@ services:
         value: "*"
       - key: REPORT_THRESHOLD
         value: "3"
+      - key: PAPER_PRICE_USD
+        value: "4.99"
+      - key: PAPER_PLATFORM_FEE_PERCENT
+        value: "20"
       # Optional – add later under the service's Environment tab:
       #   ADMIN_EMAILS       your email, to review reported posts
       #   ANTHROPIC_API_KEY  turns on AI review of post images

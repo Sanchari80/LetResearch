@@ -72,9 +72,11 @@ function handleNotificationSideEffects(n: AppNotification) {
       break;
     case 'post_like':
     case 'post_comment':
+    case 'post_mention':
+    case 'comment_mention':
       if (n.postId) {
         invalidate(keys.post(n.postId));
-        if (n.type === 'post_comment') invalidate(keys.comments(n.postId));
+        if (n.type === 'post_comment' || n.type === 'comment_mention') invalidate(keys.comments(n.postId));
       }
       break;
     default:

@@ -6,8 +6,8 @@ export const VISIBILITY = ['public', 'connections', 'private'];
 /** Who can open a research paper's details. */
 export const PAPER_VIEW_ACCESS = ['public', 'connections', 'private'];
 
-/** Who can download a research paper (or open its external link). */
-export const PAPER_DOWNLOAD_ACCESS = ['everyone', 'connections', 'none'];
+/** How a research paper or external link can be accessed. */
+export const PAPER_DOWNLOAD_ACCESS = ['everyone', 'connections', 'none', 'paid'];
 
 /** Personal details that carry their own privacy toggle. */
 export const PROFILE_FIELDS = ['qualification', 'institution', 'location', 'bio', 'interests'];
@@ -74,6 +74,8 @@ export const NOTIFICATION_TYPES = [
   'message_request_accepted',
   'post_like',
   'post_comment',
+  'post_mention',
+  'comment_mention',
   'paper_download',
   'post_flagged',
   'post_removed',
@@ -87,6 +89,8 @@ export const NOTIFICATION_CATEGORY = {
   message_request_accepted: 'requests',
   post_like: 'engagement',
   post_comment: 'engagement',
+  post_mention: 'engagement',
+  comment_mention: 'engagement',
   post_flagged: 'engagement',
   post_removed: 'engagement',
   post_restored: 'engagement',
@@ -95,6 +99,6 @@ export const NOTIFICATION_CATEGORY = {
 
 export const NOTIFICATION_TYPES_BY_CATEGORY = {
   requests: ['connection_request', 'connection_accepted', 'message_request', 'message_request_accepted'],
-  engagement: ['post_like', 'post_comment', 'post_flagged', 'post_removed', 'post_restored'],
+  engagement: ['post_like', 'post_comment', 'post_mention', 'comment_mention', 'post_flagged', 'post_removed', 'post_restored'],
   downloads: ['paper_download'],
 };

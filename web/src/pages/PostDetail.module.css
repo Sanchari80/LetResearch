@@ -76,33 +76,3 @@
   align-items: center;
   gap: 8px;
 }
-.input {
-  flex: 1;
-  min-width: 0;
-  min-height: 40px;
-  max-height: 120px;
-  resize: none;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: var(--surface-raised);
-  padding: 9px 14px;
-  font-size: 16px;
-  line-height: 20px;
-  color: var(--ink);
-  outline: none;
-  transition:
-    border-color var(--fast) ease,
-    box-shadow var(--fast) ease;
-}
-@media (min-width: 900px) {
-  .input {
-    font-size: var(--size-body);
-  }
-}
-.input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(47, 111, 104, 0.12);
-}
-.input::placeholder {
-  color: var(--text3);
-}
