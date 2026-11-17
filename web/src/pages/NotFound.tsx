@@ -6,7 +6,7 @@ import page from './Page.module.css';
 export default function NotFoundPage() {
   usePageTitle('Page not found');
   return (
-    <main className={page.centerScreen} style={{ minHeight: '100dvh' }}>
+    <main className={`${page.centerScreen} ${page.fullScreen}`}>
       <EmptyState
         icon={IconCompass}
         title="This page doesn't exist"

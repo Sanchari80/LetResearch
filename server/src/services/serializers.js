@@ -48,6 +48,10 @@ export function profileForViewer(user, status) {
     ...userSummary(user),
     institution: profile.institution || '',
     coverUrl: publicFileUrl(user.cover),
+    coverPosition: {
+      x: Number.isFinite(user.coverPosition?.x) ? user.coverPosition.x : 50,
+      y: Number.isFinite(user.coverPosition?.y) ? user.coverPosition.y : 50,
+    },
     profile,
     links,
     joinedAt: user.createdAt,

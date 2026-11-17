@@ -39,7 +39,7 @@ if (!jwtSecret) {
 
 export const config = {
   appName: 'LetResearch',
-  publisher: 'SKT Software Land',
+  publisher: 'SKTix',
   version: '1.0.0',
   isProduction,
   port: Number(env.PORT) || 4000,

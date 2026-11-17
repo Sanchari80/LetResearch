@@ -31,6 +31,10 @@ const userSchema = new Schema(
     headline: { type: String, default: '', maxlength: 140 },
     avatar: { type: Schema.Types.ObjectId, default: null },
     cover: { type: Schema.Types.ObjectId, default: null },
+    coverPosition: {
+      x: { type: Number, min: 0, max: 100, default: 50 },
+      y: { type: Number, min: 0, max: 100, default: 50 },
+    },
     profile: {
       qualification: { type: String, default: '', maxlength: 140 },
       institution: { type: String, default: '', maxlength: 140 },

@@ -17,10 +17,15 @@
   padding-bottom: 40px;
 }
 .centerScreen {
+  min-height: 70vh;
   min-height: 70dvh;
   display: grid;
   place-items: center;
   padding: 24px var(--gutter);
+}
+.fullScreen {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 .footerBar {
   position: sticky;

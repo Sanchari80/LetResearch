@@ -1,6 +1,6 @@
 # LetResearch – notes for Claude
 
-LetResearch is an academic research network published by SKT Software Land. Read `README.md` for features, deploy steps and environment variables.
+LetResearch is an academic research network published by SKTix. Read `README.md` for features, deploy steps and environment variables.
 
 - `web/` – the app: React 19 + Vite + TypeScript, an installable PWA (service worker in `web/src/sw.ts`, built with vite-plugin-pwa `injectManifest`). Deployed on Vercel with root directory `web`.
 - `server/` – Node.js API: Express 5, Socket.IO, Mongoose/MongoDB, uploads in MongoDB GridFS, web push with `web-push`. Deployed on Render with `render.yaml`.

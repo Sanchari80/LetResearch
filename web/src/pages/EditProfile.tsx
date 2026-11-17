@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'motion/react';
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, type FormEvent, type PointerEvent as ReactPointerEvent } from 'react';
 import { useSearchParams } from 'react-router';
 import { IconCamera, IconPlus, IconSparkles, IconTrash, IconX } from '@/components/icons';
 import { PrivacyPill } from '@/components/privacy/PrivacyControls';
@@ -22,6 +22,7 @@ import styles from './EditProfile.module.css';
 import page from './Page.module.css';
 
 interface FormState {
+  coverPosition: { x: number; y: number };
   name: string;
   headline: string;
   username: string;
@@ -34,6 +35,7 @@ interface FormState {
 function fromProfile(user: Profile): FormState {
   return {
     name: user.name,
+    coverPosition: user.coverPosition,
     headline: user.headline,
     username: user.username,
     openToCollaborate: user.openToCollaborate,
@@ -69,6 +71,8 @@ export default function EditProfilePage() {
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState<'avatar' | 'cover' | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const coverImage = useRef<HTMLImageElement>(null);
+  const coverDrag = useRef<{ pointerId: number; x: number; y: number; position: FormState['coverPosition'] } | null>(null);
 
   useEffect(() => {
     if (welcome) clearNewUser();
@@ -168,6 +172,7 @@ export default function EditProfilePage() {
           profile: form.profile,
           links: form.links,
           visibility: form.visibility,
+          coverPosition: form.coverPosition,
         },
       });
       setUser({ ...me!, ...result.user });
@@ -190,6 +195,35 @@ export default function EditProfilePage() {
 
   const avatarUri = fileUrl(user.avatarUrl);
   const coverUri = fileUrl(user.coverUrl);
+  const moveCover = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const drag = coverDrag.current;
+    const image = coverImage.current;
+    if (!drag || drag.pointerId !== event.pointerId || !image) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const scale = Math.max(bounds.width / image.naturalWidth, bounds.height / image.naturalHeight);
+    const overflowX = image.naturalWidth * scale - bounds.width;
+    const overflowY = image.naturalHeight * scale - bounds.height;
+    setForm((f) =>
+      f
+        ? {
+            ...f,
+            coverPosition: {
+              x: overflowX > 0 ? Math.max(0, Math.min(100, drag.position.x - ((event.clientX - drag.x) / overflowX) * 100)) : f.coverPosition.x,
+              y: overflowY > 0 ? Math.max(0, Math.min(100, drag.position.y - ((event.clientY - drag.y) / overflowY) * 100)) : f.coverPosition.y,
+            },
+          }
+        : f,
+    );
+  };
+  const startCoverDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0) return;
+    event.preventDefault();
+    coverDrag.current = { pointerId: event.pointerId, x: event.clientX, y: event.clientY, position: form.coverPosition };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const endCoverDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (coverDrag.current?.pointerId === event.pointerId) coverDrag.current = null;
+  };
 
   return (
     <>
@@ -221,7 +255,24 @@ export default function EditProfilePage() {
 
         <Card padded={false} className={`${styles.imagesCard} enter`}>
           <div className={styles.cover} style={coverUri ? undefined : { background: 'var(--metal-cover)' }}>
-            {coverUri ? <img src={coverUri} alt="" className={styles.coverImage} /> : null}
+            {coverUri ? (
+              <div
+                className={styles.coverCrop}
+                onPointerDown={startCoverDrag}
+                onPointerMove={moveCover}
+                onPointerUp={endCoverDrag}
+                onPointerCancel={endCoverDrag}
+              >
+                <img
+                  ref={coverImage}
+                  src={coverUri}
+                  alt=""
+                  className={styles.coverImage}
+                  style={{ objectPosition: `${form.coverPosition.x}% ${form.coverPosition.y}%` }}
+                  draggable={false}
+                />
+              </div>
+            ) : null}
             <div className={styles.coverButtons}>
               {coverUri ? (
                 <IconButton
@@ -260,6 +311,39 @@ export default function EditProfilePage() {
               {avatarUri ? <Button label="Remove photo" size="sm" variant="ghost" onClick={() => changeImage('avatar', true)} /> : null}
             </div>
           </div>
+          {coverUri ? (
+            <div className={styles.coverPosition}>
+              <p className={styles.coverHint}>Drag the photo to frame it. Adjust precisely with the sliders.</p>
+              <label className={styles.positionControl}>
+                <span>Horizontal</span>
+                <input
+                  aria-label="Cover photo horizontal position"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={form.coverPosition.x}
+                  onChange={(event) => setForm((f) => (f ? { ...f, coverPosition: { ...f.coverPosition, x: Number(event.target.value) } } : f))}
+                />
+              </label>
+              <label className={styles.positionControl}>
+                <span>Vertical</span>
+                <input
+                  aria-label="Cover photo vertical position"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={form.coverPosition.y}
+                  onChange={(event) => setForm((f) => (f ? { ...f, coverPosition: { ...f.coverPosition, y: Number(event.target.value) } } : f))}
+                />
+              </label>
+              <Button
+                label="Center photo"
+                size="sm"
+                variant="ghost"
+                onClick={() => setForm((f) => (f ? { ...f, coverPosition: { x: 50, y: 50 } } : f))}
+              />
+            </div>
+          ) : null}
         </Card>
 
         <Card as="section" className={styles.section}>
@@ -302,7 +386,7 @@ export default function EditProfilePage() {
         </Card>
 
         <Card as="section" className={styles.section}>
-          <h2 className="t-title">Academic details</h2>
+          <h2 className="t-title">Details</h2>
           <p className="t-meta">Choose who can see each detail with the pill beside it.</p>
           <TextField
             label="Qualification"

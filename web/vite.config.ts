@@ -2,7 +2,7 @@ import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
-const description = 'Share research, curate your paper index and chat with researchers. Published by SKT Software Land.';
+const description = 'Share research, curate your paper index and chat with researchers. Published by SKTix.';
 
 // A new id for every build: content saved on the device by an older release is not reused.
 const buildId = Date.now().toString(36);

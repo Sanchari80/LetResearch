@@ -50,6 +50,7 @@ export interface ProfileDetails {
 
 export interface Profile extends UserSummary {
   coverUrl: string | null;
+  coverPosition: { x: number; y: number };
   profile: ProfileDetails;
   links: Partial<Record<LinkField, string>>;
   joinedAt: string;

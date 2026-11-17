@@ -1,8 +1,8 @@
 {
   "name": "letresearch-web",
   "version": "1.0.0",
-  "description": "LetResearch – the academic research network. Installable web app (PWA). Published by SKT Software Land.",
-  "author": "SKT Software Land",
+  "description": "LetResearch – the academic research network. Installable web app (PWA). Published by SKTix.",
+  "author": "SKTix",
   "private": true,
   "type": "module",
   "engines": {

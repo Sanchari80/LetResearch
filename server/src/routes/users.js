@@ -46,6 +46,13 @@ router.patch('/me', requireAuth, async (req, res) => {
   }
   if (body.headline !== undefined) set.headline = cleanText(body.headline, 140);
   if (body.openToCollaborate !== undefined) set.openToCollaborate = !!body.openToCollaborate;
+  if (body.coverPosition !== undefined) {
+    const { x, y } = body.coverPosition || {};
+    if (![x, y].every((value) => typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 100)) {
+      throw badRequest('Choose a valid cover position.', 'INVALID_COVER_POSITION');
+    }
+    set.coverPosition = { x, y };
+  }
   if (body.username !== undefined) {
     const username = cleanText(body.username, 30).toLowerCase();
     if (!USERNAME_PATTERN.test(username) || RESERVED_USERNAMES.has(username)) {

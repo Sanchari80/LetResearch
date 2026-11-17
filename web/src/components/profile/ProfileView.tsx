@@ -224,7 +224,14 @@ export function ProfileView({ handle, headerRight }: Props) {
     <div className={styles.page}>
       {/* Cover */}
       <div className={styles.cover} style={coverUri ? undefined : { background: 'var(--metal-cover)' }}>
-        {coverUri ? <img src={coverUri} alt="" className={styles.coverImage} /> : null}
+        {coverUri ? (
+          <img
+            src={coverUri}
+            alt=""
+            className={styles.coverImage}
+            style={{ objectPosition: `${user.coverPosition.x}% ${user.coverPosition.y}%` }}
+          />
+        ) : null}
         <div className={styles.coverActions}>
           {headerRight}
           {isOwner ? (

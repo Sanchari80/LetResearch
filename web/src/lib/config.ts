@@ -1,5 +1,5 @@
 export const APP_NAME = 'LetResearch';
-export const PUBLISHER = 'SKT Software Land';
+export const PUBLISHER = 'SKTix';
 export const APP_VERSION = '1.0.0';
 
 const trimSlash = (value: string) => value.replace(/\/+$/, '');

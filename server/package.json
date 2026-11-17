@@ -1,8 +1,8 @@
 {
   "name": "letresearch-server",
   "version": "1.0.0",
-  "description": "LetResearch API and real-time server (Express, Socket.IO, MongoDB). Published by SKT Software Land.",
-  "author": "SKT Software Land",
+  "description": "LetResearch API and real-time server (Express, Socket.IO, MongoDB). Published by SKTix.",
+  "author": "SKTix",
   "license": "UNLICENSED",
   "private": true,
   "type": "module",

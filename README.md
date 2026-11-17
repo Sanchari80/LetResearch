@@ -1,6 +1,6 @@
 # LetResearch
 
-**The academic research network – published by SKT Software Land.**
+**The academic research network – published by SKTix.**
 
 LetResearch is an installable web app (PWA) for researchers. It runs in any browser on phones, tablets and computers, and installs like a normal app on Android, iPhone, iPad, Windows, macOS and ChromeOS – no app store needed. Researchers build a profile with per-detail privacy, curate a paper index, share research in an academic-only feed, connect, and chat in real time. Notifications arrive even when the app is closed, and content you have already opened stays readable offline.
 
@@ -334,4 +334,4 @@ PWABuilder wraps the deployed PWA in a real Android app (a Trusted Web Activity)
 
 ---
 
-© SKT Software Land. LetResearch is published by SKT Software Land.
+© SKTix. LetResearch is published by SKTix.

@@ -2,6 +2,7 @@
 .root {
   display: flex;
   flex-direction: column;
+  height: 100vh;
   height: 100dvh;
   background: var(--bg);
 }
@@ -11,8 +12,15 @@
     left: 0;
     right: 0;
     top: var(--chat-top, 0px);
-    height: var(--chat-h, 100dvh);
+    height: var(--chat-h, 100vh);
     z-index: 10;
+  }
+}
+@supports (height: 100dvh) {
+  @media (max-width: 899px) {
+    .root {
+      height: var(--chat-h, 100dvh);
+    }
   }
 }
 
